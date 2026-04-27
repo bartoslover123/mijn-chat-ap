@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Chat</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+</head>
+<body>
+    <div class="top-stats">
+        <span class="dot"></span> Online: <span id="count">...</span>
+    </div>
+
+    <div class="chat-wrapper">
+        <div class="partner-info-bar" id="infoBar">Initialiseren...</div>
+
+        <div id="video-grid">
+            <div id="localBox" class="video-box hidden">
+                <video id="localVideo" autoplay muted playsinline></video>
+                <span class="vid-label">Jij</span>
+            </div>
+            <div id="remoteBox" class="video-box hidden">
+                <video id="remoteVideo" autoplay playsinline></video>
+                <span class="vid-label">Vreemde</span>
+            </div>
+        </div>
+
+        <div class="chat-main">
+            <div id="loading-overlay" class="overlay">
+                <div class="spinner"></div>
+            </div>
+            <div id="chat-box"></div>
+        </div>
+
+        <div class="chat-controls">
+            <div class="main-input-row">
+                <button onclick="document.getElementById('fileInput').click()" class="square-btn photo-btn" id="photoBtn" disabled>📷</button>
+                <input type="file" id="fileInput" style="display:none" accept="image/*" onchange="sendPhoto(event)">
+                <input type="text" id="msgInput" placeholder="Wacht op match..." onkeypress="handleKey(event)" disabled>
+                <button onclick="sendMessage()" class="square-btn send-btn" id="sendBtn" disabled>STUUR</button>
+            </div>
+            <div class="action-row">
+                <button id="skipBtn" onclick="nextMatch()" class="big-btn skip-btn">VOLGENDE (ESC)</button>
+                <button id="camBtn" onclick="toggleCamera()" class="big-btn cam-btn">CAMERA AAN</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

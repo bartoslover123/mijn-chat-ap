@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatApp - Start</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="landing-page">
+        <div class="hero-card">
+            <div class="logo-area">
+                <img src="logo.png" alt="Logo" class="logo-img">
+                <p class="tagline">Start direct met chatten</p>
+            </div>
+
+            <div id="online-counter">Nu online: <span id="count">...</span></div>
+
+            <form action="chat.html" method="GET" class="entry-form">
+                <div class="input-group">
+                    <label>Ik ben een:</label>
+                    <select name="gender">
+                        <option value="Man">Man</option>
+                        <option value="Vrouw">Vrouw</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Leeftijd:</label>
+                    <input type="number" name="age" min="18" max="99" value="18" required>
+                </div>
+                <button type="submit" class="glow-button">START CHATTEN</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const socket = io();
+        socket.on('user-count', (count) => {
+            document.getElementById('count').innerText = count;
+        });
+    </script>
+</body>
+</html>
